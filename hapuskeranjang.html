@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hapus Produk dari Keranjang</title>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
+<body>
+    <script>
+        // Fungsi untuk menghapus produk dari keranjang berdasarkan ID
+        function hapusProduk(idProduk) {
+            // Ambil data keranjang dari localStorage
+            const keranjang = JSON.parse(localStorage.getItem('keranjang')) || [];
+            
+            // Filter produk untuk menghapus yang sesuai dengan ID
+            const keranjangBaru = keranjang.filter(item => item.id !== idProduk);
+
+            // Simpan keranjang baru ke localStorage
+            localStorage.setItem('keranjang', JSON.stringify(keranjangBaru));
+
+            // Berikan notifikasi kepada pengguna
+            Swal.fire({
+                title: 'Produk dihapus!',
+                text: 'Produk telah berhasil dihapus dari keranjang.',
+                icon: 'success',
+                confirmButtonText: 'OK'
+            }).then(() => {
+                // Arahkan kembali ke halaman keranjang
+                window.location.href = 'keranjang.html';
+            });
+        }
+
+        // Simulasikan mendapatkan ID produk dari URL (contoh: ?id=123)
+        const urlParams = new URLSearchParams(window.location.search);
+        const idProduk = urlParams.get('id');
+
+        // Periksa apakah ID produk ada, lalu panggil fungsi hapus
+        if (idProduk) {
+            hapusProduk(idProduk);
+        } else {
+            Swal.fire({
+                title: 'Error!',
+                text: 'ID produk tidak ditemukan.',
+                icon: 'error',
+                confirmButtonText: 'OK'
+            }).then(() => {
+                // Kembali ke halaman keranjang jika ID tidak valid
+                window.location.href = 'keranjang.html';
+            });
+        }
+    </script>
+</body>
+</html>

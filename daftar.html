@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daftar Pelanggan</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>    
+    <!-- Include navigation menu here (if any) -->
+
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-md-8 offset-md-2">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Daftar Pelanggan</h3>
+                    </div>
+                    <div class="panel-body">
+                        <form id="registerForm" class="form-horizontal">
+                            <div class="form-group">
+                                <label class="control-label col-md-3" for="nama">Nama</label>
+                                <div class="col-md-7">
+                                    <input type="text" id="nama" class="form-control" name="nama" required>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-3" for="email">Email</label>
+                                <div class="col-md-7">
+                                    <input type="email" id="email" class="form-control" name="email" required>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-3" for="password">Password</label>
+                                <div class="col-md-7">
+                                    <input type="password" id="password" class="form-control" name="password" required>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-3" for="alamat">Alamat</label>
+                                <div class="col-md-7">
+                                    <textarea id="alamat" class="form-control" name="alamat" required></textarea>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-3" for="telepon">Telp/Hp</label>
+                                <div class="col-md-7">
+                                    <input type="text" id="telepon" class="form-control" name="telepon" required>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-md-7 offset-md-3">
+                                    <button type="submit" class="btn btn-primary">Daftar</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Handling form submission using JavaScript (for demo purposes)
+        document.getElementById("registerForm").addEventListener("submit", function(event) {
+            event.preventDefault();
+
+            // Get form data
+            var nama = document.getElementById("nama").value;
+            var email = document.getElementById("email").value;
+            var password = document.getElementById("password").value;
+            var alamat = document.getElementById("alamat").value;
+            var telepon = document.getElementById("telepon").value;
+
+            // For demo purposes, we'll log the data in the console
+            console.log("Nama: " + nama);
+            console.log("Email: " + email);
+            console.log("Password: " + password);
+            console.log("Alamat: " + alamat);
+            console.log("Telepon: " + telepon);
+
+            // Simulate successful registration alert
+            alert("Pendaftaran sukses, silahkan login");
+            // You can redirect user to another page after successful registration
+            window.location.href = "login.html"; // Adjust to your login page
+        });
+    </script>
+    
+</body>
+</html>

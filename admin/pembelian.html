@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Pembelian</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f9;
+        }
+
+        .container-fluid {
+            padding-left: 0;
+            padding-right: 0;
+        }
+
+        .row {
+            margin: 0;
+        }
+
+        .sidebar {
+            height: 100vh;
+            background-color: #343a40;
+            padding-top: 20px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 250px;
+            transition: all 0.3s ease;
+        }
+
+        .sidebar.hidden {
+            left: -250px;
+        }
+
+        .sidebar a {
+            color: #f00303;
+            padding: 15px 20px;
+            text-decoration: none;
+            display: block;
+            margin: 10px 0;
+        }
+
+        .sidebar a:hover {
+            background-color: #007bff;
+            color: white;
+        }
+
+        .content {
+            margin-left: 250px;
+            padding: 20px;
+            transition: margin-left 0.3s ease;
+        }
+
+        .content.hidden {
+            margin-left: 0;
+        }
+
+        .toggle-btn {
+            font-size: 20px;
+            color: #343a40;
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background-color: transparent;
+            border: none;
+            cursor: pointer;
+        }
+
+        .table th, .table td {
+            text-align: center;
+        }
+
+        .navbar-brand {
+            font-size: 22px;
+            color: #fff;
+            text-align: center;
+        }
+
+        .list-group-item {
+            background-color: #343a40;
+            border: none;
+        }
+
+        .sidebar-header {
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 22px;
+            color: #fff;
+        }
+    </style>
+    <script>
+        // Function to toggle sidebar visibility
+        function toggleSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            const content = document.getElementById('content');
+            sidebar.classList.toggle('hidden');
+            content.classList.toggle('hidden');
+        }
+    </script>
+</head>
+<body>
+
+    <div class="container-fluid">
+        <div class="row">
+            <!-- Sidebar -->
+            <div class="col-md-3 sidebar" id="sidebar">
+                <!-- Admin Panel Title -->
+                <div class="sidebar-header">
+                    Admin Panel
+                </div>
+
+                <!-- Sidebar Menu -->
+                <div class="list-group">
+                    <a href="index.html" class="list-group-item">
+                        <img src="assets/home/Home.jpg" alt="Home" style="width:24px; height:24px;"> Home
+                    </a>
+                    <a href="produk.html" class="list-group-item">
+                        <img src="assets/produk/produk.jpg" alt="Produk" style="width:24px; height:24px;"> Produk
+                    </a>
+                    <a href="pelanggan.html" class="list-group-item">
+                        <img src="assets/pelanggan/pelanggan.webp" alt="Pelanggan" style="width:24px; height:24px;"> Pelanggan
+                    </a>
+                    <a href="logout.html" class="list-group-item">
+                        <img src="assets/logout/lO1.jpg" alt="Logout" style="width:24px; height:24px;"> Logout
+                    </a>
+                </div>
+            </div>
+
+            <!-- Content -->
+            <div class="col-md-9 content" id="content">
+                <button class="toggle-btn" onclick="toggleSidebar()">&#9776;</button>
+                <div class="container mt-4">
+                    <h2>Data Pembelian</h2>
+
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>No</th>
+                                <th>Nama Pelanggan</th>
+                                <th>Tanggal</th>
+                                <th>Total</th>
+                                <th>Aksi</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Data Pembelian Statis -->
+                            <tr>
+                                <td>1</td>
+                                <td>John Doe</td>
+                                <td>2024-12-01</td>
+                                <td>Rp 1,000,000</td>
+                                <td>
+                                    <a href="detail.html?id=1" class="btn btn-info">Detail</a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>2</td>
+                                <td>Jane Smith</td>
+                                <td>2024-11-15</td>
+                                <td>Rp 500,000</td>
+                                <td>
+                                    <a href="detail.html?id=2" class="btn btn-info">Detail</a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>3</td>
+                                <td>Tommy Johnson</td>
+                                <td>2024-10-10</td>
+                                <td>Rp 750,000</td>
+                                <td>
+                                    <a href="detail.html?id=3" class="btn btn-info">Detail</a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS, jQuery, Popper.js -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

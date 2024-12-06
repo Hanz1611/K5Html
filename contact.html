@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us - K5-Fashion</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            color: #333;
+            background-color: #f5f5f5;
+        }
+
+        /* Header */
+        .big-banner {
+            background: #ff7e5f;
+            color: white;
+            padding: 20px 0;
+        }
+
+        .menu .box {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 10%;
+        }
+
+        .logo h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 2rem;
+            margin: 0;
+        }
+
+        .logo .red {
+            color: #ff4747;
+        }
+
+        .menu-toggle {
+            display: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: white;
+        }
+
+        .menulist {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+
+        .menulist a {
+            text-decoration: none;
+            color: white;
+            margin: 0 15px;
+            font-weight: 500;
+            white-space: nowrap;
+        }
+
+        .btn-register {
+            background: #ff4747;
+            padding: 8px 16px;
+            border-radius: 5px;
+            color: white;
+            font-size: 0.9rem;
+            margin-left: 10px;
+        }
+
+        .btn-register:hover {
+            background: #feb47b;
+            transition: background 0.3s ease-in-out;
+        }
+
+        /* Contact Section */
+        .contact-section {
+            padding: 50px 10%;
+            background: #fff;
+        }
+
+        .contact-section h2 {
+            text-align: center;
+            margin-bottom: 40px;
+            color: #333;
+        }
+
+        .card {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            margin-bottom: 20px;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+
+        .card h3 {
+            color: #ff4747;
+        }
+
+        .card p {
+            font-size: 1rem;
+            color: #777;
+        }
+
+        .card .btn-contact {
+            background-color: #ff4747;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+        }
+
+        .card .btn-contact:hover {
+            background-color: #feb47b;
+        }
+
+        /* Footer */
+        footer {
+            background: #333;
+            color: white;
+            padding: 20px 10%;
+            text-align: center;
+            font-size: 0.9rem;
+        }
+
+        footer a {
+            color: #ff4747;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        footer a:hover {
+            color: #feb47b;
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <div class="big-banner">
+        <div class="menu">
+            <div class="box">
+                <div class="logo">
+                    <h1>K5-<span class='red'>Fashion</span></h1>
+                </div>
+                <div class="menu-toggle" onclick="toggleMenu()">&#9776;</div>
+                <div class="menulist">
+                    <a href="home.html">Home</a>
+                    <a href="keranjang.html">Keranjang</a>
+                    <a href="login.html" id="login-link">Login</a>
+                    <a href="checkout.html">Checkout</a>
+                    <a href="contact.html">Contact</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Header -->
+
+    <!-- Contact Section -->
+    <section class="contact-section">
+        <h2>Contact Us</h2>
+
+        <div class="row">
+            <div class="card">
+                <h3>Customer Service</h3>
+                <p>If you have any questions about your order, feel free to contact us.</p>
+                <a href="mailto:support@k5fashion.com" class="btn-contact">Email Us</a>
+            </div>
+
+            <div class="card">
+                <h3>Sales Inquiry</h3>
+                <p>For inquiries about our products and services, please reach out to us.</p>
+                <a href="mailto:sales@k5fashion.com" class="btn-contact">Email Sales</a>
+            </div>
+
+            <div class="card">
+                <h3>Store Location</h3>
+                <p>Visit our physical store for an in-person shopping experience.</p>
+                <a href="https://maps.app.goo.gl/5gZtbDstHuZgm2G77" class="btn-contact" target="_blank">View Map</a>
+            </div>
+
+            <div class="card">
+                <h3>Wholesale Inquiry</h3>
+                <p>Interested in buying in bulk? Contact our wholesale team.</p>
+                <a href="mailto:wholesale@k5fashion.com" class="btn-contact">Email Wholesale</a>
+            </div>
+
+            <div class="card">
+                <h3>Feedback</h3>
+                <p>Your feedback helps us improve. Share your thoughts with us.</p>
+                <a href="feedback.html" class="btn-contact">Give Feedback</a>
+            </div>
+        </div>
+    </section>
+    <!-- End Contact Section -->
+
+    <footer>
+        <p>&copy; 2024 K5-Fashion. All rights reserved. | <a href="privacy.html">Privacy Policy</a> | <a href="terms.html">Terms of Service</a></p>
+    </footer>
+
+    <script>
+        function toggleMenu() {
+            const menu = document.querySelector('.menulist');
+            menu.classList.toggle('show');
+        }
+
+        // Simulasi perubahan menu login/logout
+        const isLoggedIn = false; // Ubah sesuai kebutuhan
+        const loginLink = document.getElementById('login-link');
+
+        if (isLoggedIn) {
+            loginLink.textContent = 'Logout';
+            loginLink.href = 'logout.html';
+        } else {
+            loginLink.textContent = 'Login';
+            loginLink.href = 'login.html';
+        }
+    </script>
+</body>
+</html>

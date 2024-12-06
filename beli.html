@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tambah Produk ke Keranjang</title>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
+<body>
+    <script>
+        // Data produk (sebaiknya konsisten dengan data produk di halaman produk)
+        const produkData = [
+            { id: 1, nama: "Sepatu", harga: 100000, gambar: "foto_produk/sepatu300.jpg" },
+            { id: 2, nama: "Jaket", harga: 750000, gambar: "foto_produk/jaket.jpeg" },
+            { id: 3, nama: "Kemeja", harga: 100000, gambar: "foto_produk/kemeja.jpg" },
+            { id: 4, nama: "Tas", harga: 150000, gambar: "foto_produk/P2.jpeg" }
+        ];
+
+        // Fungsi untuk menambahkan produk ke keranjang
+        function tambahKeKeranjang(idProduk) {
+            // Cari produk berdasarkan ID
+            const produk = produkData.find(item => item.id === parseInt(idProduk));
+            
+            if (!produk) {
+                Swal.fire({
+                    title: 'Error!',
+                    text: 'Produk tidak ditemukan.',
+                    icon: 'error',
+                    confirmButtonText: 'Kembali'
+                }).then(() => {
+                    window.location.href = 'produk.html';
+                });
+                return;
+            }
+
+            // Ambil keranjang dari localStorage (atau buat array kosong)
+            const keranjang = JSON.parse(localStorage.getItem('keranjang')) || [];
+
+            // Periksa apakah produk sudah ada di keranjang
+            const itemKeranjang = keranjang.find(item => item.id === produk.id);
+
+            if (itemKeranjang) {
+                // Jika produk sudah ada, tambahkan jumlahnya
+                itemKeranjang.jumlah += 1;
+            } else {
+                // Jika produk belum ada, tambahkan ke keranjang
+                keranjang.push({ ...produk, jumlah: 1 });
+            }
+
+            // Simpan keranjang kembali ke localStorage
+            localStorage.setItem('keranjang', JSON.stringify(keranjang));
+
+            // Notifikasi ke pengguna
+            Swal.fire({
+                title: 'Berhasil!',
+                text: `${produk.nama} telah masuk ke keranjang belanja.`,
+                icon: 'success',
+                confirmButtonText: 'Lihat Keranjang'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    // Redirect ke halaman keranjang
+                    window.location.href = 'keranjang.html';
+                }
+            });
+        }
+
+        // Ambil ID produk dari URL (contoh: ?id=1)
+        const urlParams = new URLSearchParams(window.location.search);
+        const idProduk = urlParams.get('id');
+
+        // Validasi ID produk dan tambahkan ke keranjang
+        if (idProduk) {
+            tambahKeKeranjang(idProduk);
+        } else {
+            Swal.fire({
+                title: 'Error!',
+                text: 'ID produk tidak ditemukan.',
+                icon: 'error',
+                confirmButtonText: 'OK'
+            }).then(() => {
+                // Kembali ke halaman produk jika ID tidak valid
+                window.location.href = 'produk.html';
+            });
+        }
+    </script>
+</body>
+</html>

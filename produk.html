@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>K5-Fashion - Produk</title>
+    <link rel="stylesheet" href="admin/assets/css/bootstrap.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f8f9fa;
+        }
+
+        .konten {
+            padding: 50px 0;
+        }
+
+        .konten h1 {
+            text-align: center;
+            margin-bottom: 30px;
+            color: #333;
+        }
+
+        .thumbnail {
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            background-color: #fff;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .thumbnail:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .thumbnail img {
+            border-radius: 10px 10px 0 0;
+            max-height: 200px;
+            object-fit: cover;
+            width: 100%;
+        }
+
+        .caption {
+            padding: 15px;
+            text-align: center;
+        }
+
+        .caption h3 {
+            font-size: 1.2rem;
+            color: #333;
+            margin: 10px 0;
+        }
+
+        .caption h5 {
+            font-size: 1rem;
+            color: #555;
+            margin-bottom: 15px;
+        }
+
+        .caption .btn {
+            margin: 5px;
+            padding: 10px 15px;
+        }
+
+        .btn-primary {
+            background-color: #007bff;
+            border-color: #007bff;
+        }
+
+        .btn-primary:hover {
+            background-color: #0056b3;
+            border-color: #004085;
+        }
+
+        .btn-default {
+            background-color: #6c757d;
+            border-color: #6c757d;
+            color: white;
+        }
+
+        .btn-default:hover {
+            background-color: #5a6268;
+            border-color: #545b62;
+        }
+
+        .form-control {
+            margin-bottom: 15px;
+        }
+
+        .btn-secondary {
+            background-color: #343a40;
+            color: white;
+        }
+
+        .btn-secondary:hover {
+            background-color: #23272b;
+        }
+
+        @media (max-width: 768px) {
+            .konten {
+                padding: 20px 10px;
+            }
+
+            .caption h3 {
+                font-size: 1rem;
+            }
+
+            .caption h5 {
+                font-size: 0.9rem;
+            }
+        }
+
+        /* Styling for header and footer */
+        header {
+            background-color: #343a40;
+            color: white;
+            padding: 10px 0;
+        }
+
+        header .nav-link {
+            color: white;
+        }
+
+        header .navbar-nav .nav-item:hover {
+            background-color: #495057;
+            border-radius: 5px;
+        }
+
+        header .navbar-nav .nav-item.active {
+            background-color: #007bff;
+            border-radius: 5px;
+        }
+
+        footer {
+            background-color: #343a40;
+            color: white;
+            padding: 20px 0;
+            text-align: center;
+        }
+
+        footer a {
+            color: #fff;
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+        /* For mobile view */
+        .navbar-toggler-icon {
+            background-color: white;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container">
+            <a class="navbar-brand" href="#">K5-Fashion</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="#">Beranda</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Produk</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Tentang Kami</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Kontak</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+<!-- Konten -->
+<section class="konten">
+    <div class="container">
+        <h1>Produk Terbaru</h1>
+
+        <!-- Form Pencarian dan Filter Harga -->
+        <form id="filter-form">
+            <div class="row">
+                <div class="col-md-4">
+                    <input type="text" id="search" class="form-control" placeholder="Cari produk...">
+                </div>
+                <div class="col-md-4">
+                    <select id="filter-harga" class="form-control">
+                        <option value="">Pilih Harga</option>
+                        <option value="murah">Harga Murah</option>
+                        <option value="mahal">Harga Mahal</option>
+                    </select>
+                </div>
+                <div class="col-md-2">
+                    <button type="button" id="filter-btn" class="btn btn-primary">Cari</button>
+                </div>
+                <div class="col-md-2">
+                    <button type="button" id="voice-search-btn" class="btn btn-secondary">🔊 Cari Produk</button>
+                </div>
+            </div>
+        </form>
+
+        <!-- Produk -->
+        <div class="row" id="produk-container">
+            <!-- Produk akan dimuat menggunakan JavaScript -->
+        </div>
+    </div>
+</section>
+
+<script>
+    const produkData = [
+        {
+            id: 1,
+            nama: "Sepatu",
+            harga: 100000,
+            gambar: "foto_produk/sepatu300.jpg"
+        },
+        {
+            id: 2,
+            nama: "Jaket",
+            harga: 7500000,
+            gambar: "foto_produk/jaket.jpeg"
+        },
+        {
+            id: 3,
+            nama: "Kemeja",
+            harga: 100000,
+            gambar: "foto_produk/kemeja.jpg"
+        },
+        {
+            id: 4,
+            nama: "Tas",
+            harga: 1500000,
+            gambar: "foto_produk/P2.jpeg"
+        }
+    ];
+
+    const produkContainer = document.getElementById("produk-container");
+
+    function loadProduk(search = "", filterHarga = "") {
+        produkContainer.innerHTML = "";
+        let filteredProduk = produkData.filter((produk) => 
+            produk.nama.toLowerCase().includes(search.toLowerCase())
+        );
+
+        if (filterHarga === "murah") {
+            filteredProduk.sort((a, b) => a.harga - b.harga);
+        } else if (filterHarga === "mahal") {
+            filteredProduk.sort((a, b) => b.harga - a.harga);
+        }
+
+        filteredProduk.forEach((produk) => {
+            const col = document.createElement("div");
+            col.classList.add("col-md-3");
+            col.innerHTML = `
+                <div class="thumbnail">
+                    <img src="${produk.gambar}" alt="${produk.nama}">
+                    <div class="caption">
+                        <h3>${produk.nama}</h3>
+                        <h5>Rp. ${produk.harga.toLocaleString()}</h5>
+                        <a href="beli.html?id=${produk.id}" class="btn btn-primary">Beli</a>
+                        <a href="detail.html?id=${produk.id}" class="btn btn-default">Detail</a>
+                    </div>
+                </div>
+            `;
+            produkContainer.appendChild(col);
+        });
+    }
+
+    document.getElementById("filter-btn").addEventListener("click", () => {
+        const search = document.getElementById("search").value;
+        const filterHarga = document.getElementById("filter-harga").value;
+        loadProduk(search, filterHarga);
+    });
+
+    // Voice Search
+    const voiceSearchBtn = document.getElementById('voice-search-btn');
+    const searchInput = document.getElementById('search');
+    const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
+    recognition.lang = 'id-ID';
+
+    voiceSearchBtn.addEventListener('click', () => recognition.start());
+
+    recognition.onresult = (event) => {
+        searchInput.value = event.results[0][0].transcript;
+        loadProduk(searchInput.value);
+    };
+
+    // Initial load
+    loadProduk();
+</script>
+
+<footer>
+    <p>&copy; 2024 K5-Fashion. All rights reserved. | <a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a></p>
+</footer>
+
+</body>
+</html>

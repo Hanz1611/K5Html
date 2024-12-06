@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detail Produk</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
+<body>
+    <!-- Menu (can be included in a separate file or here directly) -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="#">K5 Fashion</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item active">
+                    <a class="nav-link" href="index.html">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="keranjang.html">Keranjang</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <section class="kontent">
+        <div class="container mt-5">
+            <div class="row">
+                <div class="col-md-6">
+                    <img src="https://via.placeholder.com/300" id="productImage" alt="Product Image" class="img-responsive">
+                </div>
+                <div class="col-md-6">
+                    <h2 id="productName">Product Name</h2>
+                    <h4 id="productPrice">Rp. 0</h4>
+
+                    <!-- Quantity input and add to cart button -->
+                    <form id="productForm">
+                        <div class="form-group">
+                            <div class="input-group">
+                                <input type="number" id="quantity" min="1" class="form-control" name="jumlah" required>
+                                <div class="input-group-btn">
+                                    <button type="submit" class="btn btn-primary">Beli</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+
+                    <p id="productDescription">Description of the product will appear here.</p>
+                    <a href="index.html" class="btn btn-default">Kembali</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Simulate product details (replace with actual data as needed)
+        const product = {
+            id: 1,
+            name: "T-Shirt Example",
+            price: 100000,
+            description: "This is an example description for a fashionable T-Shirt.",
+            image: "https://via.placeholder.com/300"
+        };
+
+        // Display product details on the page
+        document.getElementById('productName').textContent = product.name;
+        document.getElementById('productPrice').textContent = "Rp. " + product.price.toLocaleString();
+        document.getElementById('productDescription').textContent = product.description;
+        document.getElementById('productImage').src = product.image;
+
+        // Handle adding product to cart
+        document.getElementById('productForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const quantity = document.getElementById('quantity').value;
+
+            if (quantity < 1) {
+                Swal.fire({
+                    title: 'Oops!',
+                    text: 'Jumlah harus lebih dari 0.',
+                    icon: 'error',
+                    confirmButtonText: 'OK'
+                });
+                return;
+            }
+
+            // Simulate adding to cart
+            let cart = JSON.parse(localStorage.getItem('cart')) || {};
+
+            // If the product is already in the cart, update quantity
+            if (cart[product.id]) {
+                cart[product.id].quantity += parseInt(quantity);
+            } else {
+                cart[product.id] = {
+                    name: product.name,
+                    price: product.price,
+                    quantity: parseInt(quantity)
+                };
+            }
+
+            localStorage.setItem('cart', JSON.stringify(cart));
+
+            // Show success message
+            Swal.fire({
+                title: 'Berhasil!',
+                text: `Produk telah masuk ke keranjang belanja.`,
+                icon: 'success',
+                confirmButtonText: 'Lihat Keranjang'
+            }).then(function() {
+                window.location.href = "keranjang.html"; // Redirect to cart page
+            });
+        });
+    </script>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

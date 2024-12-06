@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Hapus Produk</title>
+    <!-- BOOTSTRAP STYLES-->
+    <link href="assets/css/bootstrap.css" rel="stylesheet" />
+    <!-- FONTAWESOME STYLES-->
+    <link href="assets/css/font-awesome.css" rel="stylesheet" />
+    <!-- CUSTOM STYLES-->
+    <link href="assets/css/custom.css" rel="stylesheet" />
+</head>
+<body>
+    <div class="container">
+        <h2>Hapus Produk</h2>
+
+        <div class="alert alert-warning" id="confirmationMessage">
+            Apakah Anda yakin ingin menghapus produk ini?
+        </div>
+
+        <button class="btn btn-danger" id="deleteButton">Hapus Produk</button>
+        <a href="index.php?halaman=produk" class="btn btn-secondary">Batal</a>
+    </div>
+
+    <!-- SCRIPTS -->
+    <script src="assets/js/jquery-1.10.2.js"></script>
+    <script src="assets/js/bootstrap.min.js"></script>
+    <script src="assets/js/custom.js"></script>
+
+    <script>
+        const productId = new URLSearchParams(window.location.search).get('id'); // Get product ID from URL
+
+        document.getElementById('deleteButton').addEventListener('click', function () {
+            if (confirm("Apakah Anda yakin ingin menghapus produk ini?")) {
+                // Send DELETE request to backend API
+                fetch(`/api/produk/${productId}`, {
+                    method: 'DELETE',
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        alert('Produk berhasil dihapus');
+                        window.location.href = 'index.php?halaman=produk'; // Redirect to produk list
+                    } else {
+                        alert('Gagal menghapus produk');
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('Terjadi kesalahan saat menghapus produk');
+                });
+            }
+        });
+    </script>
+</body>
+</html>

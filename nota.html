@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detail Pembelian</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
+<body>
+    <!-- Menu (can be included in a separate file or here directly) -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="#">K5 Fashion</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item active">
+                    <a class="nav-link" href="index.html">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="keranjang.html">Keranjang</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <section class="kontent">
+        <div class="container mt-5">
+            <div class="row">
+                <div class="col-md-12">
+                    <h2>Detail Pembelian</h2>
+
+                    <!-- Simulated Data (replace with actual data if using a real API) -->
+                    <div id="orderDetails">
+                        <p><strong>Nama:</strong> <span id="customerName">John Doe</span></p>
+                        <p><strong>Telepon:</strong> <span id="customerPhone">08123456789</span></p>
+                        <p><strong>Alamat:</strong> <span id="shippingAddress">Jl. Example No.123</span></p>
+                        <p><strong>Kota:</strong> <span id="cityName">Jakarta</span> (Ongkir: Rp. 20,000)</p>
+                        <p><strong>Total Belanja:</strong> Rp. <span id="totalAmount">150,000</span></p>
+
+                        <h4>Detail Pembelian:</h4>
+                        <ul id="productDetails">
+                            <li>Produk A x 2 = Rp. 50,000</li>
+                            <li>Produk B x 1 = Rp. 100,000</li>
+                        </ul>
+                    </div>
+
+                    <!-- Button to send WhatsApp message -->
+                    <button id="sendWhatsApp" class="btn btn-primary">Kirim ke WhatsApp</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Simulated data for the customer and purchase (replace with actual dynamic data)
+        const customerName = "John Doe";
+        const customerPhone = "08123456789";
+        const shippingAddress = "Jl. Example No.123";
+        const cityName = "Jakarta";
+        const shippingCost = 20000;
+        const totalAmount = 150000;
+        const products = [
+            { name: "Produk A", quantity: 2, price: 25000, subTotal: 50000 },
+            { name: "Produk B", quantity: 1, price: 100000, subTotal: 100000 }
+        ];
+
+        // Function to generate WhatsApp message
+        function generateWhatsAppMessage() {
+            let message = "Nota Pembelian Baru\n\n";
+            message += `Nama: ${customerName}\n`;
+            message += `Telepon: ${customerPhone}\n`;
+            message += `Alamat: ${shippingAddress}\n`;
+            message += `Kota: ${cityName} (Ongkir: Rp. ${shippingCost.toLocaleString()})\n`;
+            message += `Total Belanja: Rp. ${totalAmount.toLocaleString()}\n\n`;
+            message += "Detail Pembelian:\n";
+
+            products.forEach(product => {
+                message += `${product.name} x${product.quantity} = Rp. ${product.subTotal.toLocaleString()}\n`;
+            });
+
+            return message;
+        }
+
+        // Handle sending WhatsApp message
+        document.getElementById('sendWhatsApp').addEventListener('click', function() {
+            const message = generateWhatsAppMessage();
+            const whatsappNumber = "+6281280760582";  // Replace with your WhatsApp number
+            const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
+
+            // Redirect to WhatsApp
+            window.location.href = whatsappUrl;
+        });
+    </script>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

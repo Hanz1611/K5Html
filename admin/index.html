@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel K5</title>
+    <link href="assets/css/bootstrap.css" rel="stylesheet" />
+    <link href="assets/css/font-awesome.css" rel="stylesheet" />
+    <link href="assets/js/morris/morris-0.4.3.min.css" rel="stylesheet" />
+    <link href="assets/css/custom.css" rel="stylesheet" />
+    <link href="http://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet" type="text/css" />
+</head>
+<body>
+    <div id="wrapper">
+        <!-- Navbar -->
+        <nav class="navbar navbar-default navbar-cls-top" role="navigation" style="margin-bottom: 0">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".sidebar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="index.html">Admin Panel K5</a>
+            </div>
+            <div style="color: white; padding: 15px 50px 5px 50px; float: right; font-size: 16px;">
+                <a href="login.html" class="btn btn-danger square-btn-adjust">Logout</a>
+            </div>
+        </nav>
+
+        <!-- Sidebar -->
+        <nav class="navbar-default navbar-side" role="navigation">
+            <div class="sidebar-collapse">
+                <ul class="nav" id="main-menu">
+                    <li class="text-center">
+                        <img src="assets/img/logo.jpg" height="100px" width="100px" class="user-image img-responsive"/>
+                    </li> 
+                    <li><a href="index.html">
+                        <img src="assets/home/Home.jpg" alt="Home" style="width:24px; height:24px;"> Home</a></li>
+                    <li><a href="produk.html">
+                        <img src="assets/produk/produk.jpg" alt="Produk" style="width:24px; height:24px;"> Produk</a></li>
+                    <li><a href="pelanggan.html">
+                        <img src="assets/pelanggan/pelanggan.webp" alt="Pelanggan" style="width:24px; height:24px;"> Pelanggan</a></li>
+                    <li><a href="logout.html">
+                        <img src="assets/logout/lO1.jpg" alt="Logout" style="width:24px; height:24px;"> Logout</a></li>
+                </ul>
+            </div>
+        </nav>
+
+        <!-- Page Content -->
+        <div id="page-wrapper">
+            <div id="page-inner">
+                <!-- Main Content Section -->
+                <div class="content">
+                    <h2>Dashboard Admin</h2>
+                    <p>Selamat datang di panel admin K5, Anda dapat mengelola produk, pelanggan, dan lainnya dari sini.</p>
+
+                    <div class="stat-box">
+                        <h3>Total Produk</h3>
+                        <p>100 Produk</p>
+                    </div>
+
+                    <div class="stat-box">
+                        <h3>Total Penjualan</h3>
+                        <p>Rp 1.500.000.000</p>
+                    </div>
+
+                    <div class="stat-box">
+                        <h3>Total Pelanggan</h3>
+                        <p>500 Pelanggan</p>
+                    </div>
+
+                    <!-- Section links -->
+                    <div class="section-links">
+                        <ul>
+                            <li><a href="produk.html">Kelola Produk</a></li>
+                            <li><a href="pelanggan.html">Kelola Pelanggan</a></li>
+                            <li><a href="pembelian.html">Lihat Pembelian</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <script src="assets/js/jquery-1.10.2.js"></script>
+    <script src="assets/js/bootstrap.min.js"></script>
+    <script src="assets/js/jquery.metisMenu.js"></script>
+    <script src="assets/js/morris/raphael-2.1.0.min.js"></script>
+    <script src="assets/js/morris/morris.js"></script>
+    <script src="assets/js/custom.js"></script>
+</body>
+</html>

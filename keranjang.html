@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Keranjang Belanja</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            margin-top: 30px;
+        }
+        table {
+            margin-top: 20px;
+        }
+        .table th, .table td {
+            vertical-align: middle;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="produk.html">K5-Fashion</a>
+        <div class="collapse navbar-collapse">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item"><a class="nav-link" href="produk.html">Home</a></li>
+                <li class="nav-item"><a class="nav-link" href="keranjang.html">Keranjang</a></li>
+                <li class="nav-item"><a class="nav-link" href="checkout.html">Checkout</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Keranjang Belanja -->
+    <div class="container">
+        <h1>Keranjang Belanja</h1>
+        <hr>
+        <div id="keranjang-container"></div>
+        <div class="mt-3">
+            <a href="produk.html" class="btn btn-secondary">Lanjutkan Belanja</a>
+            <button id="checkout-btn" class="btn btn-primary">Checkout</button>
+        </div>
+    </div>
+
+    <script>
+        // Menampilkan isi keranjang
+        function displayKeranjang() {
+            const keranjang = JSON.parse(localStorage.getItem('keranjang')) || [];
+            const container = document.getElementById('keranjang-container');
+    
+            // Jika keranjang kosong, tampilkan pesan dan arahkan ke produk.html
+            if (keranjang.length === 0) {
+                Swal.fire({
+                    title: 'Keranjang kosong!',
+                    text: 'Silakan tambahkan produk terlebih dahulu.',
+                    icon: 'warning',
+                    confirmButtonText: 'Ok'
+                }).then(() => {
+                    window.location.href = 'produk.html';
+                });
+                return;
+            }
+    
+            // Membuat tabel keranjang
+            let table = `
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>No</th>
+                            <th>Produk</th>
+                            <th>Harga</th>
+                            <th>Jumlah</th>
+                            <th>Subharga</th>
+                            <th>Aksi</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+            `;
+    
+            let totalHarga = 0;
+    
+            keranjang.forEach((item, index) => {
+                const subharga = item.harga * item.jumlah;
+                totalHarga += subharga;
+    
+                table += `
+                    <tr>
+                        <td>${index + 1}</td>
+                        <td>${item.nama}</td>
+                        <td>Rp. ${item.harga.toLocaleString()}</td>
+                        <td>${item.jumlah}</td>
+                        <td>Rp. ${subharga.toLocaleString()}</td>
+                        <td>
+                            <button class="btn btn-danger btn-sm" onclick="hapusItem(${index})">Hapus</button>
+                        </td>
+                    </tr>
+                `;
+            });
+    
+            table += `
+                    </tbody>
+                </table>
+                <h4>Total Harga: Rp. ${totalHarga.toLocaleString()}</h4>
+            `;
+    
+            container.innerHTML = table;
+        }
+    
+        // Fungsi untuk menghapus item
+        function hapusItem(index) {
+            const keranjang = JSON.parse(localStorage.getItem('keranjang')) || [];
+    
+            if (index >= 0 && index < keranjang.length) {
+                Swal.fire({
+                    title: 'Konfirmasi Hapus',
+                    text: 'Apakah Anda yakin ingin menghapus item ini?',
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonText: 'Ya, hapus!',
+                    cancelButtonText: 'Batal'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        // Hapus item dari keranjang
+                        keranjang.splice(index, 1);
+                        localStorage.setItem('keranjang', JSON.stringify(keranjang));
+    
+                        // Tampilkan keranjang yang diperbarui
+                        displayKeranjang();
+    
+                        // Notifikasi sukses
+                        Swal.fire('Berhasil!', 'Item telah dihapus.', 'success');
+                    }
+                });
+            } else {
+                Swal.fire('Error!', 'Item tidak ditemukan.', 'error');
+            }
+        }
+    
+        // Fungsi tombol checkout
+        document.getElementById('checkout-btn').addEventListener('click', () => {
+            const keranjang = JSON.parse(localStorage.getItem('keranjang')) || [];
+            if (keranjang.length === 0) {
+                Swal.fire('Keranjang kosong!', 'Silakan tambahkan produk terlebih dahulu.', 'error');
+            } else {
+                Swal.fire('Berhasil!', 'Lanjutkan ke halaman checkout.', 'success').then(() => {
+                    window.location.href = 'checkout.html';
+                });
+            }
+        });
+    
+        // Muat keranjang saat halaman dimuat
+        displayKeranjang();
+    </script>
+    
+</body>
+</html>

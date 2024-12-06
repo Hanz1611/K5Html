@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Logout - K5-Fashion</title>
+    <script>
+        // Fungsi logout
+        function logout() {
+            // Hapus status login dari localStorage
+            localStorage.removeItem('isLoggedIn');
+            alert('Anda telah Logout');
+            // Arahkan pengguna kembali ke halaman utama
+            window.location.href = 'index.html';
+        }
+    </script>
+</head>
+<body onload="logout()">
+</body>
+</html>

@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Detail Pembelian</title>
+    <!-- BOOTSTRAP STYLES-->
+    <link href="assets/css/bootstrap.css" rel="stylesheet" />
+    <!-- FONTAWESOME STYLES-->
+    <link href="assets/css/font-awesome.css" rel="stylesheet" />
+    <!-- CUSTOM STYLES-->
+    <link href="assets/css/custom.css" rel="stylesheet" />
+</head>
+
+<body>
+    <div class="container">
+        <h2>Detail Pembelian</h2>
+
+        <!-- Display customer details -->
+        <div id="customerDetails">
+            <strong id="customerName"></strong>
+            <p>
+                <span id="customerPhone"></span><br>
+                <span id="customerEmail"></span>
+            </p>
+            <p>
+                Tanggal: <span id="purchaseDate"></span><br>
+                Total: <span id="totalPurchase"></span>
+            </p>
+        </div>
+
+        <!-- Display product details -->
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>No</th>
+                    <th>Nama Produk</th>
+                    <th>Harga</th>
+                    <th>Jumlah</th>
+                    <th>Subtotal</th>
+                </tr>
+            </thead>
+            <tbody id="productDetails">
+                <!-- Product rows will be inserted here -->
+            </tbody>
+        </table>
+    </div>
+
+    <!-- SCRIPTS -->
+    <script src="assets/js/jquery-1.10.2.js"></script>
+    <script src="assets/js/bootstrap.min.js"></script>
+    <script src="assets/js/custom.js"></script>
+
+    <script>
+        // Fetch purchase details from the backend API
+        const purchaseId = new URLSearchParams(window.location.search).get('id'); // Get purchase ID from URL
+
+        // Fetch the data from API
+        fetch(`/api/pembelian/${purchaseId}`)
+            .then(response => response.json())
+            .then(data => {
+                // Display customer details
+                document.getElementById('customerName').innerText = data.nama_pelanggan;
+                document.getElementById('customerPhone').innerText = data.telepon_pelanggan;
+                document.getElementById('customerEmail').innerText = data.email_pelanggan;
+                document.getElementById('purchaseDate').innerText = data.tanggal_pembelian;
+                document.getElementById('totalPurchase').innerText = `Rp. ${data.total_pembelian.toLocaleString()}`;
+
+                // Display product details
+                const productTableBody = document.getElementById('productDetails');
+                data.produk.forEach((product, index) => {
+                    const row = document.createElement('tr');
+                    row.innerHTML = `
+                        <td>${index + 1}</td>
+                        <td>${product.nama_produk}</td>
+                        <td>Rp. ${product.harga_produk.toLocaleString()}</td>
+                        <td>${product.jumlah}</td>
+                        <td>Rp. ${(product.harga_produk * product.jumlah).toLocaleString()}</td>
+                    `;
+                    productTableBody.appendChild(row);
+                });
+            })
+            .catch(error => {
+                console.error('Error fetching data:', error);
+            });
+    </script>
+</body>
+
+</html>
